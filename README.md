@@ -12,7 +12,7 @@ The location that localgit will push to by default is
 a folder that it will generate in your home directory.
 
 I'm sure there is already a tool out there that does this.
-You can also do this using git already, where you have it work
-with your local directories instead of in the cloud. The purpose
+You can also do this using git already. The purpose
 of this project is to build a lightweight tool that allows
-for redundancy while building personal projects.
+for redundancy while building personal projects on your
+local machine.
