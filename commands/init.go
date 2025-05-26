@@ -30,12 +30,15 @@ func Init() {
     }
 
     // Creates starter folders
+    // There are some folders intentionally omitted for simplicity
     os.Mkdir(".lit/branches", 0777)
+    os.Mkdir(".lit/hooks", 0777)
     os.Mkdir(".lit/info", 0777)
+    os.Mkdir(".lit/objects", 0777)
+    os.Mkdir(".lit/refs", 0777)
 
     // Creates starter files
-    os.Create(".lit/branches/master")
+    // There are some files intentionally omitted for simplicity
+    os.Create(".lit/HEAD")
     os.Create(".lit/info/exclude")
-    os.Create(".lit/config")
-    os.Create(".lit/description")
 }
