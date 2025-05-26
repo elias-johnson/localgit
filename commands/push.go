@@ -1,5 +1,12 @@
 package commands
 
+import (
+    "fmt"
+    "io"
+    "os"
+    "path/filepath"
+)
+
 /**
  * Pushes changes from the cwd to a pseudo-remote repo.
  *
@@ -12,7 +19,7 @@ func Push() {
         fmt.Println("An error occurred while accessing home directory:", err)
         return
     }
-    target := home + "/localgit"
+    target := home + "/.litstore"
 
     // Initializes remote directory if it does not exist
     _, err = os.Stat(target)

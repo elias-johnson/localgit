@@ -16,27 +16,26 @@ import (
  */
 func Init() {
     // Skips reinitialization if instance already exists
-    _, err := os.Stat(".localgit")
+    _, err := os.Stat(".lit")
     if err == nil {
         fmt.Println("localgit has already been initialized in this directory.")
         return
     }
 
     // Creates localgit folder
-    err = os.Mkdir(".localgit", 0755)
+    err = os.Mkdir(".lit", 0755)
     if err != nil {
         fmt.Println("An error occurred while trying to initialize localgit:", err)
         return
     }
 
     // Creates starter folders
-    os.Mkdir(".localgit/branches", 0755)
-    os.Mkdir(".localgit/info", 0755)
+    os.Mkdir(".lit/branches", 0777)
+    os.Mkdir(".lit/info", 0777)
 
     // Creates starter files
-    os.Create(".localgit/branches/master")
-    os.Create(".localgit/info/exclude")
-    os.Create(".localgit/config")
-    os.Create(".localgit/description")
-    os.Create(".localgit/target")
+    os.Create(".lit/branches/master")
+    os.Create(".lit/info/exclude")
+    os.Create(".lit/config")
+    os.Create(".lit/description")
 }

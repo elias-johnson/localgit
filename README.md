@@ -1,6 +1,7 @@
 # Localgit
 
 Localgit is local version control.
+Local Information Tracker --> lit
 
 
 The goal of this project localgit is to have all of the

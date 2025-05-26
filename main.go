@@ -25,6 +25,6 @@ func main() {
         // TODO
         fmt.Println("Filler")
     default:
-        fmt.Printf("localgit: '%s' is not a localgit command. See `localgit help`\n", args[0])
+        fmt.Printf("lit: '%s' is not a localgit command. See `lit help`\n", args[0])
     }
 }
