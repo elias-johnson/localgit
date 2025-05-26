@@ -6,13 +6,13 @@ import (
 )
 
 /**
- * Initializes instance of localgit within the current working directory.
+ * Initializes instance of localgit within the cwd.
  *
  * Attempts to create a localgit folder within the cwd. If one does
  * not already exist, it will create one and initialize starter files within it.
  *
  * Init is limited in scope to the cwd.
- * Upon initialization, no changes will be made to the target directory.
+ * Upon initialization, no changes will be made to the remote directory.
  */
 func Init() {
     // Skips reinitialization if instance already exists
