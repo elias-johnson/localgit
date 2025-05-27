@@ -1,7 +1,7 @@
 package commands
 
 import (
-    "fmt"
+    "log"
     "os"
 )
 
@@ -15,18 +15,18 @@ import (
  * Upon initialization, no changes will be made to the remote directory.
  */
 func Init() {
+    log.SetFlags(0)
+
     // Skips reinitialization if instance already exists
     _, err := os.Stat(".lit")
     if err == nil {
-        fmt.Println("localgit has already been initialized in this directory.")
-        return
+        log.Fatal("localgit has already been initialized in this directory.")
     }
 
     // Creates localgit folder
     err = os.Mkdir(".lit", 0755)
     if err != nil {
-        fmt.Println("An error occurred while trying to initialize localgit:", err)
-        return
+        log.Fatalf("An error occurred while trying to initialize localgit:", err)
     }
 
     // Creates starter folders

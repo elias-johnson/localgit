@@ -1,7 +1,8 @@
 package commands
 
 import (
-    "fmt"
+	"localgit/utils"
+	"log"
 )
 
 /**
@@ -9,11 +10,10 @@ import (
  */
 func Add(args []string) {
 	// Ensures localgit has been initialized
-	// TODO
+	utils.CheckForInitialization()
 
 	// Ensures an additional argument was provided
     if len(args) == 0 {
-        fmt.Println("Nothing specified, nothing added.")
-        return
+		log.Fatalf("Nothing specified, nothing added.")
     }
 }

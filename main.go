@@ -3,10 +3,12 @@ package main
 import (
     "fmt"
     "localgit/commands"
+    "log"
     "os"
 )
 
 func main() {
+    log.SetFlags(0)
     args := os.Args[1:]
 
     // Displays usage if no arguments were supplied
