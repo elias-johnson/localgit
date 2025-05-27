@@ -15,14 +15,12 @@ import (
 func CheckForInitialization() bool {
     wd := GetWorkingDirectory()
     for {
-        // Checks if localgit directory exists
         path := filepath.Join(wd, "/.lit")
         info, err := os.Stat(path)
+
         if err == nil && info.IsDir() {
             return true
-        }
-
-        if wd == "/" {
+        } else if wd == "/" {
             break
         }
 
@@ -41,4 +39,17 @@ func GetWorkingDirectory() string {
     }
 
     return wd
+}
+
+func PathExists(path string) bool {
+    _, err := os.Stat(path)
+
+    return !os.IsNotExist(err)
+}
+
+func PathInWD(wd, path string) bool {
+    // append path to wd and see if it exists
+    // what happens if the input is like '/tmp'?
+    // does that make the total path like /mnt/c/Users/xxx/repo//tmp? with double //
+    return true
 }

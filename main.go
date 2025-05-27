@@ -26,8 +26,7 @@ func main() {
     case "push":
         commands.Push()
     case "help":
-        // TODO
-        fmt.Println("Filler")
+        fmt.Println("[Display usage]")
     default:
         fmt.Printf("lit: '%s' is not a localgit command. See `lit help`\n", args[0])
     }
