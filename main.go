@@ -19,6 +19,8 @@ func main() {
     switch args[0] {
     case "init":
         commands.Init()
+    case "add":
+        commands.Add(args[1:])
     case "push":
         commands.Push()
     case "help":
