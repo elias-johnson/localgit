@@ -11,15 +11,18 @@ import (
  *
  * A directory is a localgit repository if it, or any of its parent directories,
  * contain the localgit folder.
+ *
+ * Returns the path that the localgit folder is within.
+ * If localgit has not been initialized within the folder, returns an empty string.
  */
-func CheckForInitialization() bool {
+func CheckForInitialization() string {
     wd := GetWorkingDirectory()
     for {
         path := filepath.Join(wd, "/.lit")
         info, err := os.Stat(path)
 
         if err == nil && info.IsDir() {
-            return true
+            return wd
         } else if wd == "/" {
             break
         }
@@ -28,8 +31,7 @@ func CheckForInitialization() bool {
         wd = parent
     }
 
-    log.Fatal("fatal: not a localgit repository (or any of the parent directories)")
-    return false
+    return ""
 }
 
 func GetWorkingDirectory() string {
@@ -41,15 +43,10 @@ func GetWorkingDirectory() string {
     return wd
 }
 
-func PathExists(path string) bool {
-    _, err := os.Stat(path)
+// TODO potentially unexpected output when `path` is an absolute path
+func PathExistsWithinWD(wd, path string) bool {
+    fullPath := filepath.Join(wd, path)
+    _, err := os.Stat(fullPath)
 
     return !os.IsNotExist(err)
-}
-
-func PathInWD(wd, path string) bool {
-    // append path to wd and see if it exists
-    // what happens if the input is like '/tmp'?
-    // does that make the total path like /mnt/c/Users/xxx/repo//tmp? with double //
-    return true
 }
