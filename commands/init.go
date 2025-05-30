@@ -9,8 +9,6 @@ import (
  * Initializes instance of localgit within the cwd.
  */
 func Init() {
-    log.SetFlags(0)
-
     // Skips reinitialization if instance already exists
     _, err := os.Stat(".lit")
     if err == nil {
