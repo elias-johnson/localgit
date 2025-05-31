@@ -3,37 +3,48 @@ package commands
 import (
 	"localgit/utils"
 	"log"
+	"os"
 )
 
 /**
- * Adds changes to staging area.
+ * Adds files to staging area.
  */
-func Add(args []string) {
-	// Ensures localgit has been initialized within this directory
-	wd := utils.CheckForLitInitialization()
-	if wd == "" {
-		log.Fatal("fatal: not a localgit repository (or any of the parent directories)")
-	}
+func Add(entries []string) {
+	utils.CheckIfLitIsInitialized()
 
 	// Ensures an additional argument was provided
-    if len(args) == 0 {
+    if len(entries) == 0 {
 		log.Fatalf("Nothing specified, nothing added.")
     }
 
 	// Ensures each entry exists within this directory
-	for _, arg := range args {
-		if !utils.PathExistsWithinWD(wd, arg) {
-			log.Fatalf("fatal: pathspec '%v' did not match any files in the localgit directory", arg)
-		}
+	for _, entry := range entries {
+		utils.CheckIfPathExistsWithinWD(entry)
 	}
 
 	// Recursively adds all entries
-	for _, arg := range args {
-		addEntry(arg)
+	for _, entry := range entries {
+		addEntry(entry)
 	}
 }
 
 func addEntry(entry string) {
+	info, _ := os.Stat(entry)
+	print(info)
+
+	// if info.IsDir() {
+	// 	entries, err := os.ReadDir(entry)
+	// 	if err != nil {
+	// 		log.Fatal(err)
+	// 	}
+
+	// 	for _, entry := range entries {
+	// 		addEntry(entry.Name())
+	// 	}
+	// } else {
+
+	// }
+
 	// if entry is a file
 		// make a copy of the file
 		// calculate its byte count
