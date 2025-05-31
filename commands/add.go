@@ -1,6 +1,7 @@
 package commands
 
 import (
+    "fmt"
     "path/filepath"
     "localgit/utils"
     "log"
@@ -32,7 +33,6 @@ func Add(entries []string) {
 }
 
 func addEntry(entry string) {
-    println(entry)
     info, _ := os.Stat(entry)
 
     if info.IsDir() {
@@ -46,12 +46,24 @@ func addEntry(entry string) {
             addEntry(fullEntry)
         }
     } else {
-        // make a copy of the file
-        // calculate its byte count
-        // prepend "blob <byte count>\0 to the copy"
-        // calculate SHA1 hash of copy contents
-        // compress the copy
-        // put the copy in .lit/objects
+        byteCount := utils.GetByteCount(entry)
+        fileContent := utils.ReadFileContents(entry)
+
+        // Prepends metadata to the file content
+        prefix := fmt.Sprintf("blob %v\x00", byteCount)
+        modifiedFileContent := append([]byte(prefix), fileContent...)
+
+        // Calculates the SHA1 hash of the file content
+        // TODO
+
+        // Compresses the file content
+        // TODO
+
+        // Creates new blob object if it does not already exist
+        // TODO
+
+        // Updates staging file
+        // TODO
         // something in .lit/index
     }
 }

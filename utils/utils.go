@@ -55,3 +55,23 @@ func GetLocalGitDirectory() string {
         wd = parent
     }
 }
+
+func GetByteCount(path string) int64 {
+    info, err := os.Stat(path)
+
+    if err != nil {
+        log.Fatalf("An error occurred while reading a file: %v", err)
+    }
+
+    return info.Size()
+}
+
+func ReadFileContents(path string) []byte {
+    fileContent, err := os.ReadFile(path)
+
+    if err != nil {
+        log.Fatalf("An error occurred while reading a file: %v", err)
+    }
+
+    return fileContent
+}
