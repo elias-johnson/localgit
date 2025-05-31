@@ -78,7 +78,7 @@ func ReadFileContents(file string) []byte {
     return fileContent
 }
 
-func CompressFile(file []byte) {
+func CompressFile(file []byte) []byte {
     var compressed bytes.Buffer
     writer := zlib.NewWriter(&compressed)
 
@@ -87,9 +87,11 @@ func CompressFile(file []byte) {
         log.Fatalf("An error occurred while compressing a file: %v", err)
     }
     writer.Close()
+
+    return compressed.Bytes()
 }
 
-func CreateBlobObject(fileName []byte, hash [20]byte) {
+func CreateBlobObject(fileName []byte, hash string) {
     if BlobObjectExists(hash) {
         return
     }
@@ -98,7 +100,7 @@ func CreateBlobObject(fileName []byte, hash [20]byte) {
     // TODO then the next part
 
     wd := GetLocalGitDirectory()
-    fullWD := filepath.Join(wd, ".lit", "objects", string(hash[:]))
+    fullWD := filepath.Join(wd, ".lit", "objects", hash)
 
     file, err := os.Create(fullWD)
     if err != nil {
@@ -112,12 +114,12 @@ func CreateBlobObject(fileName []byte, hash [20]byte) {
     }
 }
 
-func BlobObjectExists(hash [20]byte) bool {
+func BlobObjectExists(hash string) bool {
     // TODO strip off first two chars from hash
     // TODO then the next part
 
     wd := GetLocalGitDirectory()
-    fullWD := filepath.Join(wd, ".lit", "objects", string(hash[:]))
+    fullWD := filepath.Join(wd, ".lit", "objects", hash)
     _, err := os.Stat(fullWD)
 
     return err == nil

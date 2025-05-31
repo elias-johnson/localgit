@@ -2,6 +2,7 @@ package commands
 
 import (
     "crypto/sha1"
+    "encoding/hex"
     "fmt"
     "path/filepath"
     "localgit/utils"
@@ -56,12 +57,13 @@ func addEntry(entry string) {
 
         // Calculates the SHA1 hash of the file content
         hash := sha1.Sum(modifiedFileContent)
+        hexHash := hex.EncodeToString(hash[:])
 
         // Compresses the file content
-        utils.CompressFile(modifiedFileContent)
+        compressedFileContent := utils.CompressFile(modifiedFileContent)
 
         // Creates new blob object if it does not already exist
-        utils.CreateBlobObject(modifiedFileContent, hash)
+        utils.CreateBlobObject(compressedFileContent, hexHash)
 
         // Updates staging file
         // TODO
