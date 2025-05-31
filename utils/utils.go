@@ -32,7 +32,7 @@ func CheckIfPathExistsWithinWD(path string) {
 
 func CheckIfLitIsInitialized() {
     if GetLocalGitDirectory() == "" {
-		log.Fatal("fatal: not a localgit repository (or any of the parent directories)")
+        log.Fatal("fatal: not a localgit repository (or any of the parent directories)")
     }
 }
 
