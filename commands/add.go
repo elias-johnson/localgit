@@ -1,6 +1,7 @@
 package commands
 
 import (
+    "crypto/sha1"
     "fmt"
     "path/filepath"
     "localgit/utils"
@@ -26,7 +27,7 @@ func Add(entries []string) {
 
     // Recursively adds all entries
     for _, entry := range entries {
-        if entry != ".lit" {
+        if entry != ".lit" && entry != ".git" {
             addEntry(entry)
         }
     }
@@ -54,13 +55,13 @@ func addEntry(entry string) {
         modifiedFileContent := append([]byte(prefix), fileContent...)
 
         // Calculates the SHA1 hash of the file content
-        // TODO
+        hash := sha1.Sum(modifiedFileContent)
 
         // Compresses the file content
-        // TODO
+        utils.CompressFile(modifiedFileContent)
 
         // Creates new blob object if it does not already exist
-        // TODO
+        utils.CreateBlobObject(modifiedFileContent, hash)
 
         // Updates staging file
         // TODO
