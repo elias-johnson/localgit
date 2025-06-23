@@ -1,5 +1,7 @@
 # Localgit
 
+[PROGRESS CURRENTLY HALTED - 6/22/25]
+
 Localgit is local version control.
 Local Information Tracker --> lit
 
